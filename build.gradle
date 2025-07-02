@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Serenity BDD
+    implementation("net.serenity-bdd:serenity-core:3.6.21")
+    implementation("net.serenity-bdd:serenity-cucumber:3.6.21")
+    implementation("net.serenity-bdd:serenity-junit:3.6.21")
+
+    // Cucumber + JUnit
+    testImplementation("io.cucumber:cucumber-java:7.14.0")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("io.cucumber:cucumber-junit:7.14.0")
+
+    // Appium
+    implementation("io.appium:java-client:8.3.0")
+
+    // Utilidades
+    implementation("org.slf4j:slf4j-simple:2.0.7")
+    implementation("commons-io:commons-io:2.15.1")
+
+    // Selenium WebDriver (requerido por Appium)
+    implementation("org.seleniumhq.selenium:selenium-java:4.8.0")
+
+
+
+
+}
+
+
+tasks.register("aggregate") {
+    dependsOn("test")
+}
+
+tasks.test {
+    systemProperty("cucumber.plugin", "pretty")
+}
